@@ -21,6 +21,8 @@ mongoose
   .then(() => console.log("Connected to DB"))
   .catch((e) => console.log(e));
 
+// Middleware
+app.use(express.json());
 // Route Middleware
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/users", usersRoute);
