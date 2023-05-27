@@ -48,12 +48,12 @@ router.get("/:id", async (req, res) => {
   }
 });
 // Get All
-router.get("/", async (req, res) => {
+router.get("/", async (req, res, next) => {
   try {
-    const hotel = await Hotel.find();
+    const hotel = await Hotel.findById("asdfbashkasashkfgbkasgfvfk");
     res.status(200).json(hotel);
   } catch (err) {
-    res.status(500).json(err);
+    next(err);
   }
 });
 export default router;

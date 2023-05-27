@@ -18,19 +18,31 @@ mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .then(() => console.log("Connected to DB"))
+  .then(() => console.log("Connected to MongoDB"))
   .catch((e) => console.log(e));
 
 // Middleware
 app.use(express.json());
+
 // Route Middleware
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/users", usersRoute);
 app.use("/api/v1/rooms", roomsRoute);
 app.use("/api/v1/hotels", hotelsRoute);
 
+app.use((err, req, res, next) => {
+  const errorStatus = err.status || 500;
+  const errorMessage = err.message || 500;
+  return res.status(errorStatus).json({
+    success: false,
+    status: errorStatus,
+    message: errorMessage,
+    stack: err.stack,
+  });
+});
+
 // Server Connection
 const port = process.env.PORT;
 app.listen(port, () => {
-  console.log("Server is up and running");
+  console.log("Backend Server is up and running");
 });
