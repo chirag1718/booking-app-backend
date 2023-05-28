@@ -50,8 +50,8 @@ export const getHotel = async (req, res, next) => {
 // Get All
 export const getAllHotels = async (req, res, next) => {
   try {
-    const hotel = await Hotel.find();
-    res.status(200).json(hotel);
+    const hotels = await Hotel.find();
+    res.status(200).json(hotels);
   } catch (err) {
     next(err);
   }
