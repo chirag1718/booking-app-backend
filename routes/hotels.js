@@ -4,8 +4,6 @@ const router = express.Router();
 // Error 👇🏻
 // import { createError } from "../utils/error.js";
 
-
-
 // Controllers 👇🏻
 import {
   createHotel,
@@ -14,15 +12,16 @@ import {
   getHotel,
   updateHotel,
 } from "../controllers/hotelController.js";
+import { verifyAdmin } from "../utils/verifyToken.js";
 
 // Create
-router.post("/", createHotel);
+router.post("/", verifyAdmin, createHotel);
 
 // Update
-router.put("/:id", updateHotel);
+router.put("/:id", verifyAdmin, updateHotel);
 
 // Delete
-router.delete("/:id", deleteHotel);
+router.delete("/:id", verifyAdmin, deleteHotel);
 // Get
 router.get("/:id", getHotel);
 // Get All
