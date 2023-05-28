@@ -2,7 +2,9 @@ import express from "express";
 const router = express.Router();
 
 // Error 👇🏻
-// import { creatError } from "../utils/error.js";
+// import { createError } from "../utils/error.js";
+
+
 
 // Controllers 👇🏻
 import {

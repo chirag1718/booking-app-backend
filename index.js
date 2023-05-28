@@ -9,6 +9,7 @@ import authRoute from "./routes/auth.js";
 import usersRoute from "./routes/users.js";
 import hotelsRoute from "./routes/hotels.js";
 import roomsRoute from "./routes/rooms.js";
+import cookieParser from "cookie-parser";
 
 // DB Connection
 const db = process.env.DB_CONNECT;
@@ -23,6 +24,7 @@ mongoose
 
 // Middleware
 app.use(express.json());
+app.use(cookieParser());
 
 // Route Middleware
 app.use("/api/v1/auth", authRoute);
@@ -32,7 +34,7 @@ app.use("/api/v1/hotels", hotelsRoute);
 
 app.use((err, req, res, next) => {
   const errorStatus = err.status || 500;
-  const errorMessage = err.message || 500;
+  const errorMessage = err.message || "Something went wrong";
   return res.status(errorStatus).json({
     success: false,
     status: errorStatus,
