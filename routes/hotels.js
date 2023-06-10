@@ -8,7 +8,7 @@ const router = express.Router();
 import {
   createHotel,
   deleteHotel,
-  getAllHotels,
+  getHotels,
   getHotel,
   updateHotel,
 } from "../controllers/hotelController.js";
@@ -25,5 +25,7 @@ router.delete("/:id", verifyAdmin, deleteHotel);
 // Get
 router.get("/:id", getHotel);
 // Get All
-router.get("/", getAllHotels);
+router.get("/", getHotels);
+router.get("/:countByCity", getHotels);
+router.get("/:countByType", getHotels);
 export default router;
