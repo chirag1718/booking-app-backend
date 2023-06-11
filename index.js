@@ -1,15 +1,18 @@
 import express from "express";
 const app = express();
 
+// DB and Middleware imports
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 dotenv.config();
+import cookieParser from "cookie-parser";
+import cors from "cors";
 
+// Local imports
 import authRoute from "./routes/auth.js";
 import usersRoute from "./routes/users.js";
 import hotelsRoute from "./routes/hotels.js";
 import roomsRoute from "./routes/rooms.js";
-import cookieParser from "cookie-parser";
 
 // DB Connection
 const db = process.env.DB_CONNECT;
@@ -25,6 +28,7 @@ mongoose
 // Middleware
 app.use(express.json());
 app.use(cookieParser());
+app.use(cors());
 
 // Route Middleware
 app.use("/api/v1/auth", authRoute);
