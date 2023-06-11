@@ -65,9 +65,15 @@ export const countByType = async (req, res, next) => {
   }
 };
 export const countByCity = async (req, res, next) => {
+  const cities = req.query.cities.split(",");
   try {
-    const hotels = await Hotel.find();
-    res.status(200).json(hotels);
+    const list = await Promise.all(
+      cities.map((city) => {
+        // it is not fetching any propety, it just counts the document which much faster then doing Hotel.find({})
+        return Hotel.countDocuments({ city: city });
+      })
+    );
+    res.status(200).json(list);
   } catch (err) {
     next(err);
   }
