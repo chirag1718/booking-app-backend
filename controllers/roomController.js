@@ -1,5 +1,6 @@
 import Room from "../model/Rooms.js";
 import Hotel from "../model/Hotel.js";
+import Rooms from "../model/Rooms.js";
 
 // Create
 export const createRoom = async (req, res, next) => {
@@ -31,6 +32,21 @@ export const updateRoom = async (req, res, next) => {
       { new: true }
     );
     res.status(200).json(updatedRoom);
+  } catch (err) {
+    next(err);
+  }
+};
+export const updateRoomAvailabitlity = async (req, res, next) => {
+  try {
+    await Room.updateOne(
+      { "roomNumbers._id": req.params.id },
+      {
+        $push: {
+          "roomNumbers.$.unavailableDates": req.body.dates,
+        },
+      }
+    );
+    res.status(200).send("Room status has been updated");
   } catch (err) {
     next(err);
   }
