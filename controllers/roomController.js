@@ -5,6 +5,7 @@ import Rooms from "../model/Rooms.js";
 // Create
 export const createRoom = async (req, res, next) => {
   const hotelId = req.params.hotelid;
+  const { desc, maxPeople, price, title } = req.body;
   const newRoom = new Room(req.body);
   try {
     const savedRoom = await newRoom.save();
