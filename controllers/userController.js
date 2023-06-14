@@ -1,4 +1,4 @@
-import User from "../model/Hotel.js";
+import User from "../model/User.js";
 
 // Update
 export const updateUser = async (req, res, next) => {
@@ -39,7 +39,7 @@ export const getUser = async (req, res, next) => {
 // Get All
 export const getAllUsers = async (req, res, next) => {
   try {
-    const users = await User.find();
+    const users = await User.find({});
     res.status(200).json(users);
   } catch (err) {
     next(err);
